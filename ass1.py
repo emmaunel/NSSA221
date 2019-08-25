@@ -70,22 +70,3 @@ if __name__ == '__main__':
     print("DNS resolution " + result)
     print("*** Test Complete. ***")
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
