@@ -6,17 +6,17 @@ from subprocess import *
 import re
 
 def pingServer(server):
-    ping = Popen(["ping", server, "-c", "3"], stdout=PIPE).stdout.read()
-    #print(ping)
-    for line in ping.split("\n"):
-        if line[0:2] == "64":
-           return True
-    return False
+    ping = os.system("ping -c 1 " + server + " > /dev/null 2>&1")
+    if ping == 0:
+        return True
+    else:
+        return False
+
     
 def findGateway():
     res = Popen(["ip", "route"], stdout=PIPE).stdout.read()
     line = res.split("\n")[0]
-    ip = re.compile(r'\d{3}.\d{1,3}.\d{1,3}.\d{1,5}')
+    ip = re.compile(r'\d{1, 3}.\d{1,3}.\d{1,3}.\d{1,5}')
     gateway = ip.search(line)
     test = gateway.group()
     return gateway.group()
@@ -33,10 +33,11 @@ def pingDNServer():
     servers = findDNServer()
     success = []
     for server in servers:
-        if pingServer(server):
+        ping = os.system("ping -c 1 " + server + " > /dev/null 2>&1")
+        if ping == 0:
             success.append(server)
             
-    if len(servers) == len(success):
+    if (len(servers) != 0) & (len(servers) == len(success)):
         return True
     return False
     
