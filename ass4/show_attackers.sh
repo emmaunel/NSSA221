@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Ayobami Adewale --> Script 4(easy)
-if [ -f "$1" ]; then
-      cat $1 | grep Failed > /tmp/filter
-else
-      echo "Cannot open log file: $1"
-      exit 1
-fi
+if [ -f "$1" ]; then cat $1 | grep Failed > /tmp/filter; else echo "Cannot open log file: $1";  exit 1; fi
+#if [ -f "$1" ]; then
+#      cat $1 | grep Failed > /tmp/filter
+#else
+#      echo "Cannot open log file: $1"
+#      exit 1
+#fi
 
 # Get all the ip seperately and saves it temporarly
 cat /tmp/filter | cut -d " " -f 11 | sort -u | grep '[0-9].[0-9].' > /tmp/ips
